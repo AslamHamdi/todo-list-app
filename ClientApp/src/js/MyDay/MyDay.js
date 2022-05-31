@@ -1,4 +1,6 @@
 import { createApp } from 'vue/dist/vue.esm-bundler'
+// import 'flowbite'
+// import Datepicker from 'flowbite/dist/datepicker'
 const _ = require('lodash')
 const $ = require('jquery')
 

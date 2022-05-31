@@ -2,10 +2,6 @@
 // import 'bootstrap';
 // import 'bootstrap/dist/css/bootstrap.css';
 import { createApp, h } from 'vue/dist/vue.esm-bundler'
-//import myDayApp from '../MyDay/MyDay';
-//import myDayApp from '../MyDay/MyDay';
-//import myDayApp from '../../js/MyDay/MyDay'
-//import plannedApp from '../Planned/Planned';
 const _ = require('lodash')
 const $ = require('jquery')
 
@@ -13,8 +9,6 @@ globalThis.__VUE_OPTIONS_API__ = true;
 globalThis.__VUE_PROD_DEVTOOLS__ = false;
 
 var hashVal = window.location.hash.substring(1);
-//$('#mainContent').load('/Views/Dashboard/dashboard.html');
-//$('#mainContentApp2').load(`/Views/MyDay/MyDay.html`);
 
 const dummy = {
     template: "#dummy",
@@ -67,23 +61,24 @@ const layoutApp = createApp({
             }
         },
         onChangeNav(hash){
-            this.isLoad = false
-            window.location.hash = hash
-            this.currentHash = hash
-            if(this.currentHash == "MyDay"){
-                $('#mainContentApp').load(`/Views/MyDay/${this.currentHash}.html`);
-                // myDayApp.unmount()
-                $.getScript(`/dist/js/MyDay/${this.currentHash}.entry.js`)
-            }else if(this.currentHash == "Important"){
-                $('#mainContentApp').load(`/Views/Important/${this.currentHash}.html`);
-                //$.getScript(`/dist/js/Important/${this.currentHash}.entry.js`)
-            }else if(this.currentHash == "Planned"){
-                $('#mainContentApp').load(`/Views/Planned/${this.currentHash}.html`);
-                $.getScript(`/dist/js/Planned/${this.currentHash}.entry.js`)
+            if(hash != this.currentHash || this.isLoad == false){
+                this.isLoad = false
+                window.location.hash = hash
+                this.currentHash = hash
+                if(this.currentHash == "MyDay"){
+                    $('#mainContentApp').load(`/Views/MyDay/${this.currentHash}.html`);
+                    $.getScript(`/dist/js/MyDay/${this.currentHash}.entry.js`)
+                }else if(this.currentHash == "Important"){
+                    $('#mainContentApp').load(`/Views/Important/${this.currentHash}.html`);
+                    //$.getScript(`/dist/js/Important/${this.currentHash}.entry.js`)
+                }else if(this.currentHash == "Planned"){
+                    $('#mainContentApp').load(`/Views/Planned/${this.currentHash}.html`);
+                    $.getScript(`/dist/js/Planned/${this.currentHash}.entry.js`)
+                }
+                setTimeout(() => {
+                    this.isLoad = true
+                }, 200)
             }
-            setTimeout(() => {
-                this.isLoad = true
-            }, 200)
         }
     },
     computed:{
@@ -100,8 +95,6 @@ const layoutApp = createApp({
     },
     components:{
         "dummy-dummy": dummy,
-        //"dashboard-app": myDayApp,
-        //"planned-app": plannedApp,
     }
 }).mount("#layoutApp")
 
