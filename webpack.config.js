@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode: 'development',
     entry: {
-        //"Shared/global": './ClientApp/src/js/Shared/global.js',
         "Shared/layout": './ClientApp/src/js/Shared/layout.js',
         "MyDay/MyDay": './ClientApp/src/js/MyDay/MyDay.js',
         "Planned/Planned": './ClientApp/src/js/Planned/Planned.js',
@@ -33,7 +32,39 @@ module.exports = {
                   loader: "babel-loader",
                 },
             },
+            {
+                test: /\.html$/i,
+                loader: "html-loader",
+            },
+            {
+                test: /\.s(c|a)ss$/,
+                use: [
+                  'vue-style-loader',
+                  'css-loader',
+                  {
+                    loader: 'sass-loader',
+                    // Requires sass-loader@^7.0.0
+                    options: {
+                      implementation: require('sass'),
+                      indentedSyntax: true // optional
+                    },
+                    // Requires >= sass-loader@^8.0.0
+                    options: {
+                      implementation: require('sass'),
+                      sassOptions: {
+                        indentedSyntax: true // optional
+                      },
+                    },
+                  },
+                ],
+            },
+        
         ]
+    },
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.js'
+        },
     },
     plugins: [
         new MiniCssExtractPlugin({

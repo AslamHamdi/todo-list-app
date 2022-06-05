@@ -9,20 +9,11 @@ app.use('/dist', express.static(__dirname + '../../dist/'))
 app.use('/ClientApp', express.static(__dirname + '../../ClientApp/'))
 app.use('/assets', express.static(__dirname + '../../ClientApp/src/assets/'))
 app.use('/Views', express.static(__dirname + '../../Views/'))
+app.use('/plugins', express.static(__dirname + '../../plugins/'))
 
 app.get('/', function(req, res){
     res.sendFile(path.join(__dirname, '../Views/Shared/layout.html'))
 })
-
-// app.get('/', function(req, res){
-//     res.redirect('/dashboard')
-// })
-
-// app.get("/:name(dashboard)?", (req, res) => {
-//     res.sendFile(path.join(__dirname, '../Views/Shared/layout.html'), {
-//         tab: capitalizeFirstLetter(req.params.name)
-//     })
-// })
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

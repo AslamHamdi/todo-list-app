@@ -1,11 +1,10 @@
-import { createApp } from 'vue/dist/vue.esm-bundler'
-// import 'flowbite'
-// import Datepicker from 'flowbite/dist/datepicker'
+import Vue from 'vue';
+import vuetify from '/plugins/vuetify'
+
 const _ = require('lodash')
 const $ = require('jquery')
 
-globalThis.__VUE_OPTIONS_API__ = true;
-globalThis.__VUE_PROD_DEVTOOLS__ = false;
+Vue.use(vuetify)
 
 const noTaskTemplate = {
     template: "#noTask",
@@ -21,7 +20,47 @@ const haveTaskTemplate = {
     }
 }
 
-const myDayApp = createApp({
+const myDayApp = new Vue({
+    el: "#myDayApp",
+    vuetify,
+    data(){
+        return{
+            buttonNow: "add",
+            date: undefined,
+            menuDate: false,
+            modalDate: false,
+            menuDate2: false,
+
+            time: null,
+            menuTime: false,
+            modalTime: false,
+        }
+    },
+    mounted(){
+        console.log("MY DAY APP")
+    },
+    methods:{
+        onClickButton(event){
+            this.buttonNow = event
+        }   
+    },
+    computed: {
+        componentNow(){
+            let component = "no-task"
+            if(this.buttonNow == "add"){
+                component = "have-task"
+            }
+            return component
+        }
+    },
+    components: {
+        "no-task": noTaskTemplate,
+        "have-task": haveTaskTemplate,
+    }
+})
+
+const myDayApp2 = {
+    template: "#myDayApp2",
     data(){
         return{
             buttonNow: "add"
@@ -46,8 +85,8 @@ const myDayApp = createApp({
     },
     components: {
         "no-task": noTaskTemplate,
-        "have-task": haveTaskTemplate
+        "have-task": haveTaskTemplate,
     }
-}).mount("#myDayApp")
+}
 
 export default myDayApp;

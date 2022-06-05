@@ -4,8 +4,7 @@ module.exports = {
   //mode: 'jit',
   content: [
     "./Views/**/*.{html}", 
-    "./ClientApp/src/js/**/*.{js}" ,
-    //"flowbite/**/*.js"
+    "./ClientApp/src/js/**/*.{js}",
   ],
   // purge: [
   //   './Views**/*.html',
@@ -19,7 +18,7 @@ module.exports = {
       }
     },
   },
+  prefix: 'tw-',
   plugins: [
-    //require('flowbite/plugin')Developer: Reload Window
   ],
 }

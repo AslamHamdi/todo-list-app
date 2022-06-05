@@ -1,4 +1,5 @@
-import { createApp } from 'vue/dist/vue.esm-bundler'
+//import { createApp } from 'vue/dist/vue.esm-bundler'
+import Vue from 'vue';
 const _ = require('lodash')
 const $ = require('jquery')
 
@@ -12,10 +13,10 @@ globalThis.__VUE_PROD_DEVTOOLS__ = false;
 //     }
 // }
 
-const plannedApp = createApp({
-    mounted(){
-        console.log("PLANNED APP")
-    }
-}).mount("#plannedApp")
+// const plannedApp = createApp({
+//     mounted(){
+//         console.log("PLANNED APP")
+//     }
+// }).mount("#plannedApp")
 
-export default plannedApp;
+//export default plannedApp;

@@ -9,107 +9,107 @@
     <link rel="icon" href="/assets/favicon.png">
     <!-- <link rel="stylesheet" href="/dist/css/Shared/layout.css"> -->
     <link rel="stylesheet" href="/dist/css/Shared/layoutTailWind.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <title>Todo List App</title>
 </head>
 
 <style>
-    .hamburger {
-        cursor: pointer;
-    }
+
 </style>
 
 <body>
-    <div id="layoutApp" class="h-screen w-full bg-white relative flex overflow-hidden">
-
+    <div id="layoutApp" class="tw-h-screen tw-w-full tw-bg-white tw-relative tw-flex tw-overflow-hidden">
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="ease-in-out duration-500 h-full flex flex-col space-y-10 items-left bg-gray-300 text-gray-700"
+            class="tw-ease-in-out tw-duration-500 tw-h-full tw-flex tw-flex-col tw-space-y-10 tw-items-left tw-bg-gray-300 tw-text-gray-700"
             :class="sidebarClass">
             <!-- Profile -->
-            <div class="space-y-2 hamburger pt-4 pl-4" v-on:click="expandSidebar()">
-                <svg class="w-8 h-8" :class="whichHeaderIcon[0]" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <div class="tw-space-y-2 tw-pt-4 tw-pl-4 tw-cursor-pointer" v-on:click="expandSidebar()">
+                <svg class="tw-w-8 tw-h-8" :class="whichHeaderIcon[0]" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
 
-                <svg class="h-8 w-8" :class="whichHeaderIcon[1]" xmlns="http://www.w3.org/2000/svg" fill="none"
+                <svg class="tw-h-8 tw-w-8" :class="whichHeaderIcon[1]" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
             </div>
 
-            <div class="space-y-8 pl-3">
+            <div class="tw-space-y-8 tw-pl-3">
                 <div @click="onChangeNav('MyDay')"
-                    class="mr-4 rounded-lg cursor-pointer items-left hover:text-white-800 hover:bg-gray-400 hover:duration-300 hover:ease-linear">
+                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-gray-400 hover:tw-duration-300 hover:tw-ease-linear">
                     <!-- <a href="/dashboard"> -->
-                    <div class="flex flex-row w-full" style="width: 100%">
-                        <div class="h-10 w-10 items-center flex justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
+                    <div class="tw-flex tw-flex-row tw-w-full" style="width: 100%">
+                        <div class="tw-h-10 tw-w-10 tw-items-center tw-flex tw-justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-8 tw-w-8" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" tw-
                                     d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                         </div>
-                        <div class="items-center flex justify-center" :class="showNavText[1]"
+                        <div class="tw-items-center tw-flex tw-justify-center" :class="showNavText[1]"
                             style="position: relative; left: 1.2rem">
-                            <span class="text-md font-medium ">My Day</span>
+                            <span class="tw-tw-text-md tw-font-medium ">My Day</span>
                         </div>
                     </div>
                     <!-- </a> -->
                 </div>
 
                 <div @click="onChangeNav('Important')"
-                    class="mr-4 rounded-lg cursor-pointer items-left hover:text-white-800 hover:bg-gray-400 hover:duration-300 hover:ease-linear">
+                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-gray-400 hover:tw-duration-300 hover:tw-ease-linear">
                     <!-- <a href="http://www.google.com" target="_blank"> -->
-                    <div class="flex flex-row w-full" style="width: 100%">
-                        <div class="h-10 w-10 items-center flex justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
+                    <div class="tw-flex tw-flex-row tw-w-full" style="width: 100%">
+                        <div class="tw-h-10 tw-w-10 tw-items-center tw-flex tw-justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                             </svg>
                         </div>
-                        <div class="items-center flex justify-center" :class="showNavText[1]"
+                        <div class="tw-items-center tw-flex tw-justify-center" :class="showNavText[1]"
                             style="position: relative; left: 1.2rem">
-                            <span class="text-md font-medium ">Important</span>
+                            <span class="tw-text-md tw-font-medium ">Important</span>
                         </div>
                     </div>
                     <!-- </a> -->
                 </div>
 
                 <div @click="onChangeNav('Planned')"
-                    class="mr-4 rounded-lg cursor-pointer items-left hover:text-white-800 hover:bg-gray-400 hover:duration-300 hover:ease-linear">
+                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-gray-400 hover:tw-duration-300 hover:tw-ease-linear">
                     <!-- <a href="http://www.google.com" target="_blank"> -->
-                    <div class="flex flex-row w-full" style="width: 100%">
-                        <div class="h-10 w-10 items-center flex justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
+                    <div class="tw-flex tw-flex-row tw-w-full" style="width: 100%">
+                        <div class="tw-h-10 tw-w-10 tw-items-center tw-flex tw-justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                         </div>
-                        <div class="items-center flex justify-center" :class="showNavText[1]"
+                        <div class="tw-items-center tw-flex tw-justify-center" :class="showNavText[1]"
                             style="position: relative; left: 1.2rem">
-                            <span class="text-md font-medium ">Planned</span>
+                            <span class="tw-text-md tw-font-medium ">Planned</span>
                         </div>
                     </div>
                     <!-- </a> -->
                 </div>
 
                 <div @click="onChangeNav('Completed')"
-                    class="mr-4 rounded-lg cursor-pointer items-left hover:text-white-800 hover:bg-gray-400 hover:duration-300 hover:ease-linear">
+                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-gray-400 hover:tw-duration-300 hover:tw-ease-linear">
                     <!-- <a href="http://www.google.com" target="_blank"> -->
-                    <div class="flex flex-row w-full" style="width: 100%">
-                        <div class="h-10 w-10 items-center flex justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
+                    <div class="tw-flex tw-flex-row tw-w-full" style="width: 100%">
+                        <div class="tw-h-10 tw-w-10 tw-items-center tw-flex tw-justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                             </svg>
                         </div>
-                        <div class="items-center flex justify-center" :class="showNavText[1]"
+                        <div class="tw-items-center tw-flex tw-justify-center" :class="showNavText[1]"
                             style="position: relative; left: 1.2rem">
-                            <span class="text-md font-medium ">Completed</span>
+                            <span class="tw-text-md tw-font-medium ">Completed</span>
                         </div>
                     </div>
                     <!-- </a> -->
@@ -117,31 +117,31 @@
             </div>
         </aside>
 
-        <div class="w-full h-full flex flex-col justify-between">
+        <div class="tw-w-full tw-h-full tw-flex tw-flex-col tw-justify-between">
             <!-- Header -->
-            <header class="h-16 w-full flex items-center relative justify-end px-5 space-x-10 bg-gray-300">
-                <!-- Informação -->
-                <div class="flex flex-shrink-0 items-center space-x-4 text-white">
-
+            <header
+                class="tw-h-16 tw-w-full tw-flex tw-items-center tw-relative tw-justify-end tw-px-5 tw-space-x-10 tw-bg-gray-300">
+                <!-- Informatio -->
+                <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-space-x-4 tw-text-white">
                     <!-- Texto -->
-                    <div class="flex flex-col items-end ">
-                        <!-- Nome -->
-                        <div class="text-md font-medium text-gray-700">Aslam Amran</div>
-                        <!-- Título -->
-                        <div class="text-sm font-regular text-gray-700">Developer</div>
+                    <div class="tw-flex tw-flex-col tw-items-end ">
+                        <div class="tw-text-md tw-font-medium tw-text-gray-700">Aslam Amran</div>
+                        <div class="tw-text-sm tw-font-regular tw-text-gray-700">Developer</div>
                     </div>
-
                     <!-- Foto -->
-                    <div class="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400">
-                        <img class="rounded-full" src="/assets/me.jpg" alt="user photo">
+                    <div
+                        class="tw-h-10 tw-w-10 tw-rounded-full tw-cursor-pointer tw-bg-gray-200 tw-border-2 tw-border-blue-400">
+                        <img class="tw-rounded-full" src="/assets/me.jpg" alt="user photo">
                     </div>
                 </div>
             </header>
             <!-- Main -->
-            <main class="max-w-full h-full flex relative overflow-y-hidden">
+            <main class="tw-max-w-full tw-h-full tw-flex tw-relative tw-overflow-y-hidden">
                 <!-- Main Content  -->
                 <div id="mainContentApp"
-                    class="h-full w-full m-4 flex flex-wrap items-start justify-start rounded-tl grid-flow-col auto-cols-max gap-4 overflow-auto">
+                    class="tw-h-full tw-w-full tw-m-4 flex tw-flex-wrap tw-items-start tw-justify-start tw-rounded-tl tw-grid-flow-col tw-auto-cols-max tw-gap-4 tw-overflow-hidden">
+                    <!-- <component :is="componentNow"></component> -->
+                    <!-- <dummy-dummy></dummy-dummy> -->
                 </div>
             </main>
         </div>
@@ -149,15 +149,39 @@
 </body>
 
 <script type="text/template" id="dummy">
-    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
+<v-app>
+    <v-row>
+        <v-col cols="11" sm="5">
+            <v-menu ref="menu" v-model="menu2" :close-on-content-click="false" :nudge-right="40"
+                :return-value.sync="time" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-text-field v-model="time" label="Picker in menu" prepend-icon="mdi-clock-time-four-outline"
+                        readonly v-bind="attrs" v-on="on"></v-text-field>
+                </template>
+                <v-time-picker v-if="menu2" v-model="time" full-width @click:minute="$refs.menu.save(time)">
+                </v-time-picker>
+            </v-menu>
+        </v-col>
+        <v-spacer></v-spacer>
+        <v-col cols="11" sm="5">
+            <v-dialog ref="dialog" v-model="modal2" :return-value.sync="time" persistent width="290px">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-text-field v-model="time" label="Picker in dialog" prepend-icon="mdi-clock-time-four-outline"
+                        readonly v-bind="attrs" v-on="on"></v-text-field>
+                </template>
+                <v-time-picker v-if="modal2" v-model="time" full-width>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="modal2 = false">
+                        Cancel
+                    </v-btn>
+                    <v-btn text color="primary" @click="$refs.dialog.save(time)">
+                        OK
+                    </v-btn>
+                </v-time-picker>
+            </v-dialog>
+        </v-col>
+    </v-row>
+</v-app>
 </script>
 
 <script type="module" src="/dist/js/Shared/layout.entry.js" defer></script>

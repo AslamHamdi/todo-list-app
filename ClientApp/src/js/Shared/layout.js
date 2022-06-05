@@ -1,23 +1,33 @@
 // import '@popperjs/core';
 // import 'bootstrap';
 // import 'bootstrap/dist/css/bootstrap.css';
-import { createApp, h } from 'vue/dist/vue.esm-bundler'
+//import { createApp, h, defineAsyncComponent } from 'vue/dist/vue.esm-bundler'
+//import 'tw-elements';
+import Vue from 'vue'
+import vuetify from '/plugins/vuetify'
 const _ = require('lodash')
 const $ = require('jquery')
 
-globalThis.__VUE_OPTIONS_API__ = true;
-globalThis.__VUE_PROD_DEVTOOLS__ = false;
-
 var hashVal = window.location.hash.substring(1);
+Vue.use(vuetify)
 
 const dummy = {
     template: "#dummy",
+    data(){
+        return{
+            time: null,
+            menu2: false,
+            modal2: false,
+        }
+    },
     mounted(){
         console.log("dummy")
     }
 }
 
-const layoutApp = createApp({
+const layoutApp = new Vue({
+    el: "#layoutApp",
+    vuetify,
     created(){
     },
     mounted(){
@@ -27,11 +37,12 @@ const layoutApp = createApp({
         return{
             //Sidebar default config
             isSidebarOpen: false,
-            sidebarClass: "w-20",
-            whichHeaderIcon: ["", "hidden"],
-            showNavText: ["", "hidden"],
+            sidebarClass: "tw-w-20",
+            whichHeaderIcon: ["", "tw-hidden"],
+            showNavText: ["", "tw-hidden"],
             currentHash: "",
             isLoad: false,
+            test: "test",
         }
     },
     methods:{
@@ -48,16 +59,16 @@ const layoutApp = createApp({
         expandSidebar(){
             if(!this.isSidebarOpen){ //Open side bar
                 this.isSidebarOpen = true;
-                this.sidebarClass = "w-60"
-                this.whichHeaderIcon = ["hidden", ""]
+                this.sidebarClass = "tw-w-60"
+                this.whichHeaderIcon = ["tw-hidden", ""]
                 setTimeout(() => {
-                    this.showNavText = ["hidden", ""]
+                    this.showNavText = ["tw-hidden", ""]
                 }, 300)
             }else{ //Close side bar
                 this.isSidebarOpen = false;
-                this.sidebarClass = "w-20"
-                this.whichHeaderIcon = ["", "hidden"]
-                this.showNavText = ["", "hidden"]
+                this.sidebarClass = "tw-w-20"
+                this.whichHeaderIcon = ["", "tw-hidden"]
+                this.showNavText = ["", "tw-hidden"]
             }
         },
         onChangeNav(hash){
@@ -66,14 +77,24 @@ const layoutApp = createApp({
                 window.location.hash = hash
                 this.currentHash = hash
                 if(this.currentHash == "MyDay"){
-                    $('#mainContentApp').load(`/Views/MyDay/${this.currentHash}.html`);
-                    $.getScript(`/dist/js/MyDay/${this.currentHash}.entry.js`)
+                    $('#mainContentApp').load(`/Views/MyDay/${this.currentHash}.html`, function(responseTxt, statusTxt, xhr){
+                        $('#mainContentApp').html(responseTxt);
+                     });
+                    //$('#mainContentApp').load(`/Views/MyDay/${this.currentHash}.html`);
+                    var script = document.createElement('script');
+                    script.src = `/dist/js/MyDay/${this.currentHash}.entry.js`;
+                    script.defer = "defer"
+                    document.body.appendChild(script);
+                    //$.getScript(`/dist/js/MyDay/${this.currentHash}.entry.js`)
                 }else if(this.currentHash == "Important"){
                     $('#mainContentApp').load(`/Views/Important/${this.currentHash}.html`);
                     //$.getScript(`/dist/js/Important/${this.currentHash}.entry.js`)
                 }else if(this.currentHash == "Planned"){
                     $('#mainContentApp').load(`/Views/Planned/${this.currentHash}.html`);
-                    $.getScript(`/dist/js/Planned/${this.currentHash}.entry.js`)
+                    // var script = document.createElement('script');
+                    // script.src = `/dist/js/Planned/${this.currentHash}.entry.js`;
+                    // document.body.appendChild(script);
+                    //$.getScript(`/dist/js/Planned/${this.currentHash}.entry.js`)
                 }
                 setTimeout(() => {
                     this.isLoad = true
@@ -86,9 +107,11 @@ const layoutApp = createApp({
             let component = "dummy-dummy"
             if(this.currentHash == "MyDay" || this.currentHash == ""){
                 console.log("HERE")
-                component = "dashboard-app"
+                component = "my-day"
             }else if(this.currentHash == "Planned"){
                 component = "planned-app"
+            }else if(this.currentHash == "Completed"){
+                component = "dummy-dummy"
             }
             return component
         }
@@ -96,7 +119,7 @@ const layoutApp = createApp({
     components:{
         "dummy-dummy": dummy,
     }
-}).mount("#layoutApp")
+})
 
 
 
