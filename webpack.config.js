@@ -6,7 +6,9 @@ module.exports = {
     entry: {
         "Shared/layout": './ClientApp/src/js/Shared/layout.js',
         "MyDay/MyDay": './ClientApp/src/js/MyDay/MyDay.js',
+        "Important/Important": './ClientApp/src/js/Important/Important.js',
         "Planned/Planned": './ClientApp/src/js/Planned/Planned.js',
+        "Tasks/Tasks": './ClientApp/src/js/Tasks/Tasks.js',
     },
     output: {
         filename: 'js/[name].entry.js',

@@ -80,21 +80,34 @@ const layoutApp = new Vue({
                     $('#mainContentApp').load(`/Views/MyDay/${this.currentHash}.html`, function(responseTxt, statusTxt, xhr){
                         $('#mainContentApp').html(responseTxt);
                      });
-                    //$('#mainContentApp').load(`/Views/MyDay/${this.currentHash}.html`);
                     var script = document.createElement('script');
                     script.src = `/dist/js/MyDay/${this.currentHash}.entry.js`;
                     script.defer = "defer"
                     document.body.appendChild(script);
-                    //$.getScript(`/dist/js/MyDay/${this.currentHash}.entry.js`)
                 }else if(this.currentHash == "Important"){
-                    $('#mainContentApp').load(`/Views/Important/${this.currentHash}.html`);
-                    //$.getScript(`/dist/js/Important/${this.currentHash}.entry.js`)
+                    $('#mainContentApp').load(`/Views/Important/${this.currentHash}.html`, function(responseTxt, statusTxt, xhr){
+                        $('#mainContentApp').html(responseTxt);
+                     });
+                    var script = document.createElement('script');
+                    script.src = `/dist/js/Important/${this.currentHash}.entry.js`;
+                    script.defer = "defer"
+                    document.body.appendChild(script);
                 }else if(this.currentHash == "Planned"){
-                    $('#mainContentApp').load(`/Views/Planned/${this.currentHash}.html`);
-                    // var script = document.createElement('script');
-                    // script.src = `/dist/js/Planned/${this.currentHash}.entry.js`;
-                    // document.body.appendChild(script);
-                    //$.getScript(`/dist/js/Planned/${this.currentHash}.entry.js`)
+                    $('#mainContentApp').load(`/Views/Planned/${this.currentHash}.html`, function(responseTxt, statusTxt, xhr){
+                        $('#mainContentApp').html(responseTxt);
+                     });
+                    var script = document.createElement('script');
+                    script.src = `/dist/js/Planned/${this.currentHash}.entry.js`;
+                    script.defer = "defer"
+                    document.body.appendChild(script);
+                }else if(this.currentHash == "Tasks"){
+                    $('#mainContentApp').load(`/Views/Tasks/${this.currentHash}.html`, function(responseTxt, statusTxt, xhr){
+                        $('#mainContentApp').html(responseTxt);
+                     });
+                    var script = document.createElement('script');
+                    script.src = `/dist/js/Tasks/${this.currentHash}.entry.js`;
+                    script.defer = "defer"
+                    document.body.appendChild(script);
                 }
                 setTimeout(() => {
                     this.isLoad = true

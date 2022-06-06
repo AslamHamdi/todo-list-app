@@ -4,7 +4,7 @@ import vuetify from '/plugins/vuetify'
 const _ = require('lodash')
 const $ = require('jquery')
 
-Vue.use(vuetify) 
+Vue.use(vuetify)
 
 const noTaskTemplate = {
     template: "#noTask",
@@ -15,41 +15,14 @@ const noTaskTemplate = {
 
 const haveTaskTemplate = {
     template: "#haveTask",
-    data(){
-        return{
-            openMenu: false,
-        }
-    },
     mounted(){
         //console.log("DASHBOARD APP")
-    },
-    methods:{
-        openDropdown(){
-            document.getElementById("dropdownMenu").classList.toggle("show");
-            
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-                }
-            }
-            }
-        }, 
     }
 }
 
-const plannedApp = new Vue({
-    el: "#plannedApp",
+const tasksApp = new Vue({
+    el: "#tasksApp",
     vuetify,
-    mounted(){
-        console.log("PLANNED APP")
-    },
     data(){
         return{
             buttonNow: "add",
@@ -63,10 +36,13 @@ const plannedApp = new Vue({
             modalTime: false,
         }
     },
+    mounted(){
+        console.log("TASKS APP")
+    },
     methods:{
         onClickButton(event){
             this.buttonNow = event
-        },  
+        }   
     },
     computed: {
         componentNow(){
@@ -82,3 +58,5 @@ const plannedApp = new Vue({
         "have-task": haveTaskTemplate,
     }
 })
+
+export default tasksApp;

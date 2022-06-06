@@ -1,9 +1,119 @@
-<div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-<div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-<div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-<div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-<div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-<div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-<div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-<div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-<div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
+<style>
+
+</style>
+
+<div id="importantApp" class="tw-w-full tw-mr-3 tw-h-full">
+    <div class="tw-flex tw-flex-row">
+        <div class="tw-items-center tw-flex tw-justify-center tw-pr-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-8 tw-w-8" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+        </div>
+        <div>
+            <span>
+                <h1 class="tw-text-3xl tw-tw-font-bold">Important</h1>
+            </span>
+        </div>
+    </div>
+    <div class="md:tw-flex md:tw-justify-center tw-mb-1 tw-pt-4">
+        <input type="text"
+            class=" tw-h-10 tw-shadow tw-appearance-none tw-border tw-w-3/4 tw-rounded tw-px-3 tw-py-2 tw-text-gray-700 tw-bg-white tw-shadow-sm tw-border-slate-500 tw-placeholder-slate-400 disabled:tw-bg-slate-50 disabled:tw-text-slate-500 disabled:tw-border-slate-200 focus:tw-outline-none focus:tw-border-sky-500 focus:tw-ring-sky-500 tw-blockrounded-md sm:tw-text-sm focus:tw-ring-1 disabled:tw-shadow-none"
+            style="background: rgba(255,255,255,0.5);" id="todayTask" type="text" placeholder="+ Add today's task">
+    </div>
+    <div class="md:tw-flex md:tw-justify-center tw-mb-1 tw-pt-1">
+        <v-app style="background: rgba(0,0,0,0);">
+            <v-row>
+                <!-- Date Picker -->
+                <v-col cols="12" lg="6" sm="6" md="4">
+                    <v-menu v-model="menuDate2" :close-on-content-click="true" :nudge-right="40"
+                        transition="scale-transition" offset-y min-width="auto">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-text-field v-model="date" label="Select Date" prepend-icon="mdi-calendar" readonly
+                                style="width: 10rem !important;" v-bind="attrs" v-on="on"></v-text-field>
+                        </template>
+                        <v-date-picker v-model="date" @input="menuDate = false"></v-date-picker>
+                    </v-menu>
+                </v-col>
+                <!-- Time Picker -->
+                <v-col cols="12" lg="6" sm="6" md="4">
+                    <v-menu ref="menu" v-model="menuTime" :close-on-content-click="false" :nudge-right="40"
+                        :return-value.sync="time" transition="scale-transition" offset-y max-width="290px"
+                        min-width="290px">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-text-field v-model="time" label="Select Time" prepend-icon="mdi-clock-time-four-outline"
+                                readonly style="width: 10rem !important;" v-bind="attrs" v-on="on"></v-text-field>
+                        </template>
+                        <v-time-picker v-if="menuTime" v-model="time" full-width @click:minute="$refs.menu.save(time)">
+                        </v-time-picker>
+                    </v-menu>
+                </v-col>
+            </v-row>
+        </v-app>
+    </div>
+    <div class="md:tw-flex md:tw-justify-center tw-space-x-2"
+        style="position: relative !important; top: -55rem !important;">
+        <button @click="onClickButton('add')"
+            class="tw-py-1 tw-px-3 tw-bg-green-500 tw-text-white tw-rounded-lg tw-shadow-md hover:tw-bg-green-700 focus:tw-outline-none  focus:tw-ring-opacity-75">
+            Add
+        </button>
+        <button @click="onClickButton('cancel')"
+            class="tw-py-1 tw-px-4 tw-bg-red-400 tw-text-white tw-rounded-lg tw-shadow-md hover:tw-bg-red-700 focus:tw-outline-none focus:tw-ring-opacity-75">
+            Cancel
+        </button>
+    </div>
+    <div class="tw-mt-3 tw-rounded-lg tw-justify-center tw-flex tw-mb-3 tw-pt-3 tw-pb-3 tw-bg-gray-200 "
+        style="margin-top: -54rem !important; height: 72%;">
+        <component :is="componentNow"></component>
+    </div>
+</div>
+
+<script type="text/template" id="noTask">
+    <div class="tw-flex tw-items-center">
+        <h1 class="tw-text-3xl tw-font-bold tw-text-gray-400">Looks like all clear for today...</h1>
+    </div>
+</script>
+
+<script type="text/template" id="haveTask">
+    <div class="tw-pl-2 tw-w-full tw-pr-2 tw-rounded-lg tw-space-y-2 tw-overflow-auto">
+        <div v-for="index in 2" :key="index" class="tw-p-6 tw-bg-white tw-rounded-lg tw-border tw-border-gray-200 tw-shadow-md dark:tw-bg-gray-800 dark:tw-border-gray-700">
+
+            <div class="tw-pr-4 tw-inline-block tw-items-end tw-space-x-2 tw-row tw-float-left">
+                <div>
+                  <button type="button" class="tw-border tw-border-solid tw-border-gray-500 tw-inline-block tw-rounded-full tw-bg-white tw-text-white tw-leading-normal tw-uppercase tw-shadow-md tw-hover:bg-gray-400 hover:tw-shadow-lg focus:tw-bg-gray-400 focus:tw-hadow-lg focus:tw-outline-none focus:tw-ring-0 active:tw-bg-blue-800 active:tw-shadow-lg tw-transition tw-duration-150 tw-ease-in-out tw-w-7 tw-h-7">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6 tw-mx-auto" viewBox="0 0 20 20" fill="white">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                  </button>
+                </div>
+            </div>
+            <!-- Task List -->
+            <div class="tw-relative tw-w-4/5 tw-inline-block">
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius dicta maiores nulla officia dolorem! Sequi sapiente tenetur eligendi vel expedita soluta, delectus aliquam doloribus suscipit quia? Quas magni exercitationem sit?</span>
+                        <!-- Meta info -->
+                <div class="tw-pt-3 tw-text-slate-500 md:tw-flex tw-items-center tw-space-x-2">
+                    <span class="tw-inline-block">&#x2022;</span>
+                    <span class="tw-inline-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-4 tw-w-4" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </span>
+                    <span class="tw-inline-block tw-text-sm">Wed, 06 June, 12:00PM</span>
+                </div>
+            </div>
+            <!-- Action button -->
+            <div class="tw-inline-block tw-items-end tw-space-x-2 tw-row tw-float-right">
+                <button @click=""
+                    class="tw-py-1 tw-px-2 tw-bg-amber-400 tw-text-white tw-rounded-lg tw-shadow-md hover:tw-bg-amber-600 focus:tw-outline-none  focus:tw-ring-opacity-75">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                      </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</script>

@@ -59,34 +59,4 @@ const myDayApp = new Vue({
     }
 })
 
-const myDayApp2 = {
-    template: "#myDayApp2",
-    data(){
-        return{
-            buttonNow: "add"
-        }
-    },
-    mounted(){
-        console.log("MY DAY APP")
-    },
-    methods:{
-        onClickButton(event){
-            this.buttonNow = event
-        }   
-    },
-    computed: {
-        componentNow(){
-            let component = "no-task"
-            if(this.buttonNow == "add"){
-                component = "have-task"
-            }
-            return component
-        }
-    },
-    components: {
-        "no-task": noTaskTemplate,
-        "have-task": haveTaskTemplate,
-    }
-}
-
 export default myDayApp;
