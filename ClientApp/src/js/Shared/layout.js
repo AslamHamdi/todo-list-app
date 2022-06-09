@@ -4,7 +4,7 @@
 //import { createApp, h, defineAsyncComponent } from 'vue/dist/vue.esm-bundler'
 //import 'tw-elements';
 import Vue from 'vue'
-import vuetify from '/plugins/vuetify'
+import vuetify from '/Config/vuetify'
 const _ = require('lodash')
 const $ = require('jquery')
 

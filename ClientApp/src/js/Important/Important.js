@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import vuetify from '/plugins/vuetify'
+import vuetify from '/Config/vuetify'
 
 const _ = require('lodash')
 const $ = require('jquery')
@@ -25,6 +25,9 @@ const importantApp = new Vue({
     vuetify,
     mounted(){
         console.log("IMPORTANT APP")
+        let vApp = document.querySelector(".v-application--wrap")
+        vApp.classList.remove("v-application--wrap")
+        vApp.classList.add("v-application")
     },
     data(){
         return{

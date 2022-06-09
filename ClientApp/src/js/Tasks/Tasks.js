@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import vuetify from '/plugins/vuetify'
+import vuetify from '/Config/vuetify'
 
 const _ = require('lodash')
 const $ = require('jquery')
@@ -38,6 +38,9 @@ const tasksApp = new Vue({
     },
     mounted(){
         console.log("TASKS APP")
+        let vApp = document.querySelector(".v-application--wrap")
+        vApp.classList.remove("v-application--wrap")
+        vApp.classList.add("v-application")
     },
     methods:{
         onClickButton(event){

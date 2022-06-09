@@ -23,7 +23,7 @@
             style="background: rgba(255,255,255,0.5);" id="todayTask" type="text" placeholder="+ Add today's task">
     </div>
     <div class="md:tw-flex md:tw-justify-center tw-mb-1 tw-pt-1">
-        <v-app style="background: rgba(0,0,0,0);">
+        <v-app style="background: rgba(0,0,0,0); padding: 0px !important;">
             <v-row>
                 <!-- Date Picker -->
                 <v-col cols="12" lg="6" sm="6" md="4">
@@ -52,8 +52,7 @@
             </v-row>
         </v-app>
     </div>
-    <div class="md:tw-flex md:tw-justify-center tw-space-x-2"
-        style="position: relative !important; top: -55rem !important;">
+    <div class="md:tw-flex md:tw-justify-center tw-space-x-2">
         <button @click="onClickButton('add')"
             class="tw-py-1 tw-px-3 tw-bg-green-500 tw-text-white tw-rounded-lg tw-shadow-md hover:tw-bg-green-700 focus:tw-outline-none  focus:tw-ring-opacity-75">
             Add
@@ -64,8 +63,9 @@
         </button>
     </div>
     <div class="tw-mt-3 tw-rounded-lg tw-justify-center tw-flex tw-mb-3 tw-pt-3 tw-pb-3 tw-bg-gray-200 "
-        style="margin-top: -54rem !important; height: 72%;">
-        <component :is="componentNow"></component>
+        style="height: 72% !important;">
+        <component :is=" componentNow">
+        </component>
     </div>
 </div>
 
