@@ -12,6 +12,6 @@ There's still a lot of library doesn't support vue 3 at the moment, 13/6/22
 5. Run 'npm start', navigate to localhost:{PORT} and you good to go
 
 # Notes
-Feel free to comments on my code or add anything. Let your imagination go wild. If you find this helpful, consider to follow and star me on github
+Feel free to comments on my code or add anything. If you find this helpful, consider to follow and star me on github
 
 Thanks
