@@ -7,19 +7,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" href="/assets/favicon.png">
-    <!-- <link rel="stylesheet" href="/dist/css/Shared/layout.css"> -->
     <link rel="stylesheet" href="/dist/css/Shared/layoutTailWind.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <script type="module" src="/ClientApp/src/js/AjaxCall.js" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <title>Todo List App</title>
 </head>
 
+<style>
+    @keyframes append-animate {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0%);
+            opacity: 1;
+        }
+    }
+
+    @keyframes delete-animate {
+        from {
+            transform: translateX(0%);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+    }
+
+    @keyframes spin-animation {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(359deg);
+        }
+    }
+
+    .new-box {
+        transform-origin: 50% 0;
+        animation: append-animate .3s linear;
+    }
+
+    .remove-box {
+        transform-origin: 50% 0;
+        animation: delete-animate .3s linear;
+    }
+
+    .is-important {
+        animation: spin-animation 0.5s infinite;
+    }
+
+    .nusuk {
+        display: none;
+    }
+</style>
+
 <body>
-    <div id="layoutApp" class="tw-h-screen tw-w-full tw-bg-white tw-relative tw-flex tw-overflow-hidden">
+    <div id="layoutApp"
+        class="tw-h-screen tw-w-full tw-bg-white tw-relative tw-flex tw-overflow-hidden tw-bg-slate-200">
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="tw-ease-in-out tw-duration-500 tw-h-full tw-flex tw-flex-col tw-space-y-10 tw-items-left tw-bg-gray-300 tw-text-gray-700"
+            class="tw-ease-in-out tw-duration-500 tw-h-full tw-flex tw-flex-col tw-space-y-10 tw-items-left tw-bg-cyan-800 tw-text-slate-200"
             :class="sidebarClass">
             <!-- Profile -->
             <div class="tw-space-y-2 tw-pt-4 tw-pl-4 tw-cursor-pointer" v-on:click="expandSidebar()">
@@ -35,9 +93,8 @@
             </div>
 
             <div class="tw-space-y-8 tw-pl-3">
-                <div @click="onChangeNav('MyDay')"
-                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-gray-400 hover:tw-duration-300 hover:tw-ease-linear">
-                    <!-- <a href="/dashboard"> -->
+                <div @click="onChangeNav('MyDay')" id="MyDayDiv"
+                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-cyan-600 hover:tw-duration-300 hover:tw-ease-linear">
                     <div class="tw-flex tw-flex-row tw-w-full" style="width: 100%">
                         <div class="tw-h-10 tw-w-10 tw-items-center tw-flex tw-justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-8 tw-w-8" fill="none"
@@ -51,12 +108,10 @@
                             <span class="tw-tw-text-md tw-font-medium ">My Day</span>
                         </div>
                     </div>
-                    <!-- </a> -->
                 </div>
 
-                <div @click="onChangeNav('Important')"
-                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-gray-400 hover:tw-duration-300 hover:tw-ease-linear">
-                    <!-- <a href="http://www.google.com" target="_blank"> -->
+                <div @click="onChangeNav('Important')" id="ImportantDiv"
+                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-cyan-600 hover:tw-duration-300 hover:tw-ease-linear">
                     <div class="tw-flex tw-flex-row tw-w-full" style="width: 100%">
                         <div class="tw-h-10 tw-w-10 tw-items-center tw-flex tw-justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6" fill="none"
@@ -70,12 +125,10 @@
                             <span class="tw-text-md tw-font-medium ">Important</span>
                         </div>
                     </div>
-                    <!-- </a> -->
                 </div>
 
-                <div @click="onChangeNav('Planned')"
-                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-gray-400 hover:tw-duration-300 hover:tw-ease-linear">
-                    <!-- <a href="http://www.google.com" target="_blank"> -->
+                <div @click="onChangeNav('Planned')" id="PlannedDiv"
+                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-cyan-600 hover:tw-duration-300 hover:tw-ease-linear">
                     <div class="tw-flex tw-flex-row tw-w-full" style="width: 100%">
                         <div class="tw-h-10 tw-w-10 tw-items-center tw-flex tw-justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6" fill="none"
@@ -89,12 +142,10 @@
                             <span class="tw-text-md tw-font-medium ">Planned</span>
                         </div>
                     </div>
-                    <!-- </a> -->
                 </div>
 
-                <div @click="onChangeNav('Tasks')"
-                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-gray-400 hover:tw-duration-300 hover:tw-ease-linear">
-                    <!-- <a href="http://www.google.com" target="_blank"> -->
+                <div @click="onChangeNav('Tasks')" id="TasksDiv"
+                    class="tw-mr-4 tw-rounded-lg tw-cursor-pointer tw-items-left hover:tw-text-white-800 hover:tw-bg-cyan-600 hover:tw-duration-300 hover:tw-ease-linear">
                     <div class="tw-flex tw-flex-row tw-w-full" style="width: 100%">
                         <div class="tw-h-10 tw-w-10 tw-items-center tw-flex tw-justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-6 tw-w-6" fill="none"
@@ -108,7 +159,6 @@
                             <span class="tw-text-md tw-font-medium ">Tasks</span>
                         </div>
                     </div>
-                    <!-- </a> -->
                 </div>
             </div>
         </aside>
@@ -116,69 +166,42 @@
         <div class="tw-w-full tw-h-full tw-flex tw-flex-col tw-justify-between">
             <!-- Header -->
             <header
-                class="tw-h-16 tw-w-full tw-flex tw-items-center tw-relative tw-justify-end tw-px-5 tw-space-x-10 tw-bg-gray-300">
+                class="tw-h-16 tw-w-full tw-flex tw-items-center tw-relative tw-justify-end tw-px-5 tw-space-x-10 tw-bg-cyan-800 tw-text-slate-200">
                 <!-- Informatio -->
-                <div class="tw-flex tw-flex-shrink-0 tw-items-center tw-space-x-4 tw-text-white">
+                <div class="tw-flex tw-absolute tw-flex-shrink-0 tw-items-center tw-space-x-4">
                     <!-- Texto -->
                     <div class="tw-flex tw-flex-col tw-items-end ">
-                        <div class="tw-text-md tw-font-medium tw-text-gray-700">Aslam Amran</div>
-                        <div class="tw-text-sm tw-font-regular tw-text-gray-700">Developer</div>
+                        <div class="tw-text-md tw-font-medium">Aslam Amran</div>
+                        <div class="tw-text-sm tw-font-regular">Developer</div>
                     </div>
                     <!-- Foto -->
-                    <div
-                        class="tw-h-10 tw-w-10 tw-rounded-full tw-cursor-pointer tw-bg-gray-200 tw-border-2 tw-border-blue-400">
-                        <img class="tw-rounded-full" src="/assets/me.jpg" alt="user photo">
+                    <div @click="openUserDropdown()"
+                        class="tw-h-10 tw-w-10  tw-rounded-full tw-cursor-pointer tw-bg-gray-200 tw-border-2 tw-border-blue-400">
+                        <img class="tw-rounded-full userdropbtn" src="/assets/me.jpg" alt="user photo">
                     </div>
                 </div>
+
+                <div id="userDropdownMenu" style="margin-top: 8.5rem; position: absolute; align-items: end;"
+                    class="nusuk transition ease-in-out delay-150 user-dropdown-content tw-min-w-max tw-absolute tw-bg-white tw-text-base tw-z-50 tw-float-left tw-py-2 tw-list-none tw-text-left tw-rounded-lg tw-shadow-lg tw-mt-1 tw-m-0 tw-bg-clip-padding tw-border-none">
+                    <a class="tw-text-sm tw-py-2 tw-px-4 tw-font-normal tw-block tw-w-full tw-whitespace-nowrap tw-bg-transparent tw-text-gray-700 hover:tw-bg-gray-200"
+                        href="#">Setting
+                    </a>
+                    <a class="tw-text-sm tw-py-2 tw-px-4 tw-font-normal tw-block tw-w-full tw-whitespace-nowrap tw-bg-transparent tw-text-gray-700 hover:tw-bg-gray-200"
+                        href="#">Log out
+                    </a>
+                </div>
             </header>
+
             <!-- Main -->
-            <main class="tw-max-w-full tw-h-full tw-flex tw-relative tw-overflow-y-hidden">
+            <main class="tw-max-w-full tw-h-full tw-flex tw-relative tw-overflow-y-hidden scrollbar">
                 <!-- Main Content  -->
                 <div id="mainContentApp"
-                    class="tw-h-full tw-w-full tw-m-4 flex tw-flex-wrap tw-items-start tw-justify-start tw-rounded-tl tw-grid-flow-col tw-auto-cols-max tw-gap-4 tw-overflow-hidden">
-                    <!-- <component :is="componentNow"></component> -->
-                    <!-- <dummy-dummy></dummy-dummy> -->
+                    class="tw-h-full tw-w-full tw-m-4 flex tw-flex-wrap tw-items-start tw-justify-start tw-rounded-tl tw-grid-flow-col tw-auto-cols-max tw-gap-4 tw-overflow-hidden tw-scrollbar">
                 </div>
             </main>
         </div>
     </div>
 </body>
-
-<script type="text/template" id="dummy">
-<v-app>
-    <v-row>
-        <v-col cols="11" sm="5">
-            <v-menu ref="menu" v-model="menu2" :close-on-content-click="false" :nudge-right="40"
-                :return-value.sync="time" transition="scale-transition" offset-y max-width="290px" min-width="290px">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-text-field v-model="time" label="Picker in menu" prepend-icon="mdi-clock-time-four-outline"
-                        readonly v-bind="attrs" v-on="on"></v-text-field>
-                </template>
-                <v-time-picker v-if="menu2" v-model="time" full-width @click:minute="$refs.menu.save(time)">
-                </v-time-picker>
-            </v-menu>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="11" sm="5">
-            <v-dialog ref="dialog" v-model="modal2" :return-value.sync="time" persistent width="290px">
-                <template v-slot:activator="{ on, attrs }">
-                    <v-text-field v-model="time" label="Picker in dialog" prepend-icon="mdi-clock-time-four-outline"
-                        readonly v-bind="attrs" v-on="on"></v-text-field>
-                </template>
-                <v-time-picker v-if="modal2" v-model="time" full-width>
-                    <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="modal2 = false">
-                        Cancel
-                    </v-btn>
-                    <v-btn text color="primary" @click="$refs.dialog.save(time)">
-                        OK
-                    </v-btn>
-                </v-time-picker>
-            </v-dialog>
-        </v-col>
-    </v-row>
-</v-app>
-</script>
 
 <script type="module" src="/dist/js/Shared/layout.entry.js" defer></script>
 

@@ -17,6 +17,11 @@ module.exports = {
         amber: colors.amber,
         emerald: colors.emerald,
         slate: colors.slate,
+        teal: colors.teal,
+        conic: colors.conic,
+        sky: colors.sky,
+        cyan: colors.cyan,
+        'light-blue': colors.lightBlue,
       }
     },
   },

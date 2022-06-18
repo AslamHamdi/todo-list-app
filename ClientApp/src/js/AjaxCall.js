@@ -1,27 +1,23 @@
-import axios from "axios";
+import * as __functionCustom from '/ClientApp/src/js/FunctionCustom.js';
 
-class AjaxCall{
-    static Post = function(url, data, object, param, forceError = false, successMsg = '', showLoad = true, runFunction = [], saveAll = false, alwaysRunFunction = false){
+export default class AjaxCall{
+    static Post = function(url, data){
         let postPromise = null;
         let objR = { inProg: true, isSuccess: false, data: null, source: undefined, promise: undefined }
         try{
-            postPromise = axios.post(url, JSON.stringify(data))
-                .then(function (response){
-                    try{
-                        if(!response.data.hasOwnProperty("data")){
-                            console.log("Cannot retrieve the data. Seems the url might be wrong. Please contact the developer")
-                        }else{
-                            objR.isSuccess = true;
-                            objR.data = response.data.data
-                        }
-                    }catch(err){}
-                })
+            postPromise = axios.post(url, JSON.stringify(data), {
+            }).then(function (response){
+                console.log("RESPONS AJAX CALL: ", response)
+            })
         }catch(err){
-            console.log("Some error happened when trying to get the data from server")
+            __functionCustom.showWarnMessage("Some error happened when trying to get the data from server")
+            //console.log("Some error happened when trying to get the data from server")
             console.log(err)
         }
-        return response
+        return objR
+    }
+
+    static Get = function(msg) {
+        __functionCustom.showSuccessMessage("AJAX CALL")
     }
 }
-
-export default AjaxCall

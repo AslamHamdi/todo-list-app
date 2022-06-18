@@ -1,29 +1,11 @@
-// import '@popperjs/core';
-// import 'bootstrap';
-// import 'bootstrap/dist/css/bootstrap.css';
-//import { createApp, h, defineAsyncComponent } from 'vue/dist/vue.esm-bundler'
-//import 'tw-elements';
 import Vue from 'vue'
 import vuetify from '/Config/vuetify'
 const _ = require('lodash')
 const $ = require('jquery')
+import * as __functionCustom from '../FunctionCustom';
 
 var hashVal = window.location.hash.substring(1);
 Vue.use(vuetify)
-
-const dummy = {
-    template: "#dummy",
-    data(){
-        return{
-            time: null,
-            menu2: false,
-            modal2: false,
-        }
-    },
-    mounted(){
-        console.log("dummy")
-    }
-}
 
 const layoutApp = new Vue({
     el: "#layoutApp",
@@ -36,6 +18,7 @@ const layoutApp = new Vue({
     data(){
         return{
             //Sidebar default config
+            openUserMenu: true,
             isSidebarOpen: false,
             sidebarClass: "tw-w-20",
             whichHeaderIcon: ["", "tw-hidden"],
@@ -46,6 +29,18 @@ const layoutApp = new Vue({
         }
     },
     methods:{
+        openUserDropdown(){
+            document.getElementById("userDropdownMenu").classList.toggle("nusuk");
+            //Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+                if (!event.target.matches('.userdropbtn')) {
+                    var dropdowns = document.querySelector("#userDropdownMenu")
+                    if (!dropdowns.classList.contains('nusuk')) {
+                        dropdowns.classList.add('nusuk');
+                    }else{}
+                }
+            }
+        },
         onInitialLoadPage(){
             if(!window.location.hash){
                 window.location.hash = "MyDay"
@@ -116,22 +111,8 @@ const layoutApp = new Vue({
         }
     },
     computed:{
-        componentNow(){
-            let component = "dummy-dummy"
-            if(this.currentHash == "MyDay" || this.currentHash == ""){
-                console.log("HERE")
-                component = "my-day"
-            }else if(this.currentHash == "Planned"){
-                component = "planned-app"
-            }else if(this.currentHash == "Completed"){
-                component = "dummy-dummy"
-            }
-            return component
-        }
+
     },
-    components:{
-        "dummy-dummy": dummy,
-    }
 })
 
 

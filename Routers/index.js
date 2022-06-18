@@ -17,11 +17,8 @@ app.get('/', function(req, res){
     res.sendFile(path.join(__dirname, '../Views/Shared/layout.html'))
 })
 
+//Api Route
 app.use('/api', require('./ApiRouter'))
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 app.listen(port, () => console.log(`Server is live on ${port}`))
 
