@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/favicon.png">
+    <link rel="stylesheet" href="/dist/css/Shared/layoutTailWind.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <script type="module" src="/ClientApp/src/js/AjaxCall.js" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <title>Login</title>
+</head>
+
+<style>
+    html {
+        overflow-y: auto
+    }
+
+    @import url(//fonts.googleapis.com/css?family=Lato:300:400);
+
+    body {
+        margin: 0;
+    }
+
+    h1 {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        letter-spacing: 2px;
+        font-size: 48px;
+    }
+
+    p {
+        font-family: 'Lato', sans-serif;
+        letter-spacing: 1px;
+        font-size: 14px;
+        color: #333333;
+    }
+
+    .header {
+        position: relative;
+        text-align: center;
+        background: linear-gradient(60deg, #000000 0%,
+                #7ED6DF 100%);
+        color: white;
+    }
+
+    .inner-header {
+        height: 75vh;
+        width: 130%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .flex {
+        /*Flexbox for containers*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .waves {
+        position: relative;
+        width: 100%;
+        height: 15vh;
+        margin-bottom: -7px;
+        /*Fix for safari gap*/
+        min-height: 100px;
+        max-height: 150px;
+    }
+
+    .content {
+        position: relative;
+        height: 20vh;
+        text-align: center;
+        background-color: white;
+    }
+
+    /* Animation */
+
+    .parallax>use {
+        animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+    }
+
+    .parallax>use:nth-child(1) {
+        animation-delay: -2s;
+        animation-duration: 7s;
+    }
+
+    .parallax>use:nth-child(2) {
+        animation-delay: -3s;
+        animation-duration: 10s;
+    }
+
+    .parallax>use:nth-child(3) {
+        animation-delay: -4s;
+        animation-duration: 13s;
+    }
+
+    .parallax>use:nth-child(4) {
+        animation-delay: -5s;
+        animation-duration: 20s;
+    }
+
+    @keyframes move-forever {
+        0% {
+            transform: translate3d(-90px, 0, 0);
+        }
+
+        100% {
+            transform: translate3d(85px, 0, 0);
+        }
+    }
+
+    /*Shrinking for mobile*/
+    @media (max-width: 768px) {
+        .waves {
+            height: 40px;
+            min-height: 40px;
+        }
+
+        .content {
+            height: 30vh;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<body>
+    <div class="header" id="loginApp">
+
+        <!--Content before waves-->
+        <div class="inner-header flex">
+            <!--Main Content-->
+            <div class="tw-mt-3 tw-rounded tw-overflow-hidden tw-shadow-lg tw-bg-gray-100"
+                style="width: 500px; height: 600px;">
+                <!-- <img class="tw-w-full" src="/assets/me.jpg" alt="Sunset in the mountains"> -->
+                <div
+                    class="tw-flex tw-flex-row tw-items-center tw-justify-center tw-font-bold tw-text-xl tw-mb-2 tw-text-gray-700 tw-py-10 tw-space-x-4">
+                    <div class="tw-items-center tw-flex tw-justify-center">
+                        <img src="/assets/favicon.png" alt="" style="height: 100px">
+                    </div>
+                    <div class="">
+                        <h1 class="tw-font-bold">Login</h1>
+                    </div>
+                </div>
+                <!-- <div class="tw-font-bold tw-text-xl tw-mb-2 tw-text-gray-700 tw-py-10">
+                    <h1 class="tw-font-bold">Login</h1>
+                </div> -->
+                <div class="tw-px-6 tw-py-8">
+                    <form class="tw-shadow-md tw-rounded tw-px-8 tw-pt-1 tw-pb-8">
+                        <div class="tw-mb-4 tw-text-left tw-h-16">
+                            <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2" for="email">
+                                Email
+                            </label>
+                            <input
+                                class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
+                                id="email" type="text" placeholder="Email address">
+                        </div>
+                        <div class="tw-mb-4 tw-text-left">
+                            <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2" for="password">
+                                Password
+                            </label>
+                            <input
+                                class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
+                                id="password" type="password" placeholder="******************">
+                        </div>
+                        <div>
+                            <div class="tw-flex tw-mb-3" style="float: left">
+                                <a @click="dialog = true"
+                                    class="tw-inline-block tw-align-baseline tw-font-bold tw-text-sm tw-text-gray-600 hover:tw-text-gray-800"
+                                    href="#">
+                                    Sign up
+                                </a>
+                            </div>
+                            <div class="tw-flex tw-mb-3" style="float: right;">
+                                <a class="tw-inline-block tw-align-baseline tw-font-bold tw-text-sm tw-text-blue-700 hover:tw-text-blue-800"
+                                    href="#">
+                                    Forgot Password?
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <button
+                                class="tw-w-full tw-bg-cyan-600 tw-shadow tw-drop-shadow-3xl hover:tw-bg-cyan-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded focus:tw-outline-none focus:tw-shadow-outline"
+                                type="button">
+                                Log in
+                            </button>
+                        </div>
+
+                        <div class="tw-flex tw-justify-between tw-items-center tw-mt-3">
+                            <hr class="tw-w-full">
+                            <span class="tw-p-2 tw-text-gray-400 tw-mb-1">OR</span>
+                            <hr class="tw-w-full">
+                        </div>
+
+                        <div>
+                            <button
+                                class="tw-block tw-inline-block tw-w-full tw-bg-gray-200 tw-shadow tw-drop-shadow-3xl hover:tw-bg-gray-400 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded focus:tw-outline-none focus:tw-shadow-outline"
+                                type="button">
+
+                                <div
+                                    class="tw-flex tw-flex-row tw-text-slate-700 tw-drop-shadow-lg tw-items-center tw-justify-center">
+                                    <div class="tw-items-center tw-flex tw-justify-center tw-pr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px"
+                                            height="30px">
+                                            <path fill="#FFC107"
+                                                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+                                            <path fill="#FF3D00"
+                                                d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+                                            <path fill="#4CAF50"
+                                                d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
+                                            <path fill="#1976D2"
+                                                d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="tw-text-blue">Continue with Google
+                                        </span>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="tw-px-6 tw-pb-2">
+                    <span
+                        class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-2 mb-2">#productivity</span>
+                </div>
+
+                <v-app>
+                    <v-row justify="center">
+                        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+                            <template v-slot:activator="{ on, attrs }">
+
+                            </template>
+                            <!-- style="background-image: url('/assets/bg5.jpg'); background-repeat: no-repeat; background-size:cover;" -->
+                            <v-card justify="center" align="center">
+                                <v-toolbar dark color="#007575">
+                                    <v-btn icon dark @click="dialog = false">
+                                        <v-icon>mdi-close</v-icon>
+                                    </v-btn>
+                                    <v-toolbar-title>Sign Up</v-toolbar-title>
+                                    <v-spacer></v-spacer>
+                                </v-toolbar>
+                                <!-- Content -->
+                                <div
+                                    class="tw-flex tw-mt-10 tw-w-2/4 tw-flex-row tw-text-gray-400 tw-drop-shadow-lg tw-items-center tw-justify-center">
+                                    <div class="tw-items-center tw-flex tw-justify-center tw-pr-2">
+                                        <img src="/assets/favicon.png" alt="" style="height: 100px">
+                                    </div>
+                                    <div class="tw-w-4/5">
+                                        <span class=""><i>“People don’t take anything seriously until it’s written down
+                                                and becomes an actual part of their daily schedule. It might take you
+                                                some time to get there but once that becomes a habit, you’ll end up
+                                                getting all that you planned done simply because it’s part of your to-do
+                                                list for the day.” — Jim Kwik</i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="justify-center tw-px-6 tw-py-8 tw-mt-5 tw-w-full tw-items-center tw-justify-center tw-justify-content-center">
+                                    <form class="tw-shadow-md tw-rounded tw-px-8 tw-pt-10 tw-pb-8 tw-w-4/5"
+                                        style="width: 500px; height: 600px; ">
+                                        <div class="tw-mb-4 tw-text-left tw-h-16">
+                                            <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
+                                                for="emailregister">
+                                                Email
+                                            </label>
+                                            <input v-model="registerForm.model.email"
+                                                class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
+                                                id="emailregister" type="text" placeholder="steve.grande@google.com">
+                                        </div>
+                                        <div class="tw-mb-4 tw-text-left tw-h-16">
+                                            <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
+                                                for="firstname">
+                                                First Name
+                                            </label>
+                                            <input v-model="registerForm.model.firstName"
+                                                class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
+                                                id="firstname" type="text" placeholder="Steve">
+                                        </div>
+                                        <div class="tw-mb-4 tw-text-left tw-h-16">
+                                            <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
+                                                for="lastname">
+                                                Last Name
+                                            </label>
+                                            <input v-model="registerForm.model.lastName"
+                                                class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
+                                                id="lastname" type="text" placeholder="Grande">
+                                        </div>
+                                        <div class="tw-mb-4 tw-text-left tw-h-16">
+                                            <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
+                                                for="username">
+                                                Username
+                                            </label>
+                                            <input v-model="registerForm.model.userName"
+                                                class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
+                                                id="username" type="text" placeholder="Steve Grande">
+                                        </div>
+                                        <div class="tw-mb-4 tw-text-left">
+                                            <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
+                                                for="passwordregister">
+                                                Password
+                                            </label>
+                                            <input v-model="registerForm.model.passWord"
+                                                class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
+                                                id="passwordregister" type="password" placeholder="******************">
+                                        </div>
+
+                                        <div>
+                                            <button @click="registerUser"
+                                                class="tw-w-full tw-bg-cyan-600 tw-shadow tw-drop-shadow-3xl hover:tw-bg-cyan-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded focus:tw-outline-none focus:tw-shadow-outline"
+                                                type="button">
+                                                Sign up
+                                            </button>
+                                        </div>
+
+                                        <div class="tw-flex tw-justify-between tw-items-center tw-mt-3">
+                                            <hr class="tw-w-full">
+                                            <span class="tw-p-2 tw-text-gray-400 tw-mb-1">OR</span>
+                                            <hr class="tw-w-full">
+                                        </div>
+
+                                        <div>
+                                            <button
+                                                class="tw-block tw-inline-block tw-w-full tw-bg-gray-200 tw-shadow tw-drop-shadow-3xl hover:tw-bg-gray-400 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded focus:tw-outline-none focus:tw-shadow-outline"
+                                                type="button">
+
+                                                <div
+                                                    class="tw-flex tw-flex-row tw-text-slate-700 tw-drop-shadow-lg tw-items-center tw-justify-center">
+                                                    <div class="tw-items-center tw-flex tw-justify-center tw-pr-2">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
+                                                            width="48px" height="30px">
+                                                            <path fill="#FFC107"
+                                                                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+                                                            <path fill="#FF3D00"
+                                                                d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+                                                            <path fill="#4CAF50"
+                                                                d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
+                                                            <path fill="#1976D2"
+                                                                d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <span class="tw-text-blue">Sign up with Google
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </v-card>
+                        </v-dialog>
+                    </v-row>
+                </v-app>
+            </div>
+
+        </div>
+
+        <!--Waves Container-->
+        <div>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave"
+                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                </g>
+            </svg>
+        </div>
+        <!--Waves end-->
+    </div>
+
+    <!--Header ends-->
+
+    <!--Content starts-->
+    <!--Content ends-->
+</body>
+<script src="/dist/js/Auth/Login.entry.js" defer></script>
+
+</html>

@@ -14,11 +14,19 @@ app.use(express.json())
 
 //Default route to layout html
 app.get('/', function(req, res){
+    res.sendFile(path.join(__dirname, '../Views/Auth/Login.html'))
+})
+
+
+//Default route to todo page
+app.get('/to-do', function(req, res){
     res.sendFile(path.join(__dirname, '../Views/Shared/layout.html'))
 })
 
 //Api Route
 app.use('/api', require('./ApiRouter'))
+//Auth router
+app.use('/auth', require('./AuthRouter'))
 
 app.listen(port, () => console.log(`Server is live on ${port}`))
 

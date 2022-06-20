@@ -32,11 +32,7 @@ class Post {
 
     async addNewTask(payload){
         let data = payload.data
-        if(data.hasOwnProperty('isImportant')){
-            data.isImportant = payload.data.isImportant
-        }else{
-            data.isImportant = null
-        }
+        data.isImportant = (data.hasOwnProperty('isImportant')) ? payload.data.isImportant : null
         let sql = "call sp_task(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, @taskId2); SELECT @taskId2;"
         const result = await db.query(sql,
             [2, data.task, data.date, data.time, 1, null, data.isImportant, null, null, null, null], function(err, result){
