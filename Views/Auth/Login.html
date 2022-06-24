@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" type="text/css" href="/ClientApp/src/js/Auth/login.css">
 
     <script type="module" src="/ClientApp/src/js/AjaxCall.js" defer></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -71,7 +72,7 @@
         height: 15vh;
         margin-bottom: -7px;
         /*Fix for safari gap*/
-        min-height: 100px;
+        min-height: 235px;
         max-height: 150px;
     }
 
@@ -133,10 +134,18 @@
             font-size: 24px;
         }
     }
+
+    .loader-class {
+        display: none;
+    }
 </style>
 
 <body>
     <div class="header" id="loginApp">
+        <div id="loaderDiv" ref="loaderDiv" class="loader-class"
+            style="width: 100%; height: 100%; background-color: rgba(255,255,255,0.5); position: absolute;">
+            <custom-loader></custom-loader>
+        </div>
 
         <!--Content before waves-->
         <div class="inner-header flex">
@@ -156,15 +165,19 @@
                 <!-- <div class="tw-font-bold tw-text-xl tw-mb-2 tw-text-gray-700 tw-py-10">
                     <h1 class="tw-font-bold">Login</h1>
                 </div> -->
+                <!-- onsubmit="return false" -->
                 <div class="tw-px-6 tw-py-8">
-                    <form class="tw-shadow-md tw-rounded tw-px-8 tw-pt-1 tw-pb-8">
+                    <form class="tw-shadow-md tw-rounded tw-px-8 tw-pt-1 tw-pb-8" @submit.prevent="loginLocal()">
                         <div class="tw-mb-4 tw-text-left tw-h-16">
                             <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2" for="email">
                                 Email
                             </label>
                             <input
                                 class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
-                                id="email" type="text" placeholder="Email address">
+                                id="email" type="email" placeholder="Email address" v-model="loginForm.model.email"
+                                name="email" oninvalid="this.setCustomValidity('Not Valid')"
+                                onchange="try{setCustomValidity('')}catch(e){}" oninput="setCustomValidity(' ')"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
                         </div>
                         <div class="tw-mb-4 tw-text-left">
                             <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2" for="password">
@@ -172,7 +185,8 @@
                             </label>
                             <input
                                 class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
-                                id="password" type="password" placeholder="******************">
+                                id="password" type="password" placeholder="******************"
+                                v-model="loginForm.model.passWord" name="password" required>
                         </div>
                         <div>
                             <div class="tw-flex tw-mb-3" style="float: left">
@@ -192,12 +206,13 @@
                         <div>
                             <button
                                 class="tw-w-full tw-bg-cyan-600 tw-shadow tw-drop-shadow-3xl hover:tw-bg-cyan-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded focus:tw-outline-none focus:tw-shadow-outline"
-                                type="button">
+                                type="submit">
+                                <!-- @click="loginLocal()" -->
                                 Log in
                             </button>
                         </div>
 
-                        <div class="tw-flex tw-justify-between tw-items-center tw-mt-3">
+                        <div class=" tw-flex tw-justify-between tw-items-center tw-mt-3">
                             <hr class="tw-w-full">
                             <span class="tw-p-2 tw-text-gray-400 tw-mb-1">OR</span>
                             <hr class="tw-w-full">
@@ -273,15 +288,19 @@
                                 <div
                                     class="justify-center tw-px-6 tw-py-8 tw-mt-5 tw-w-full tw-items-center tw-justify-center tw-justify-content-center">
                                     <form class="tw-shadow-md tw-rounded tw-px-8 tw-pt-10 tw-pb-8 tw-w-4/5"
-                                        style="width: 500px; height: 600px; ">
+                                        style="width: 500px; height: 600px; " onsubmit="return false">
                                         <div class="tw-mb-4 tw-text-left tw-h-16">
                                             <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
                                                 for="emailregister">
                                                 Email
                                             </label>
-                                            <input v-model="registerForm.model.email"
+                                            <input v-model="registerForm.model.email" required
                                                 class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
-                                                id="emailregister" type="text" placeholder="steve.grande@google.com">
+                                                id="emailregister" type="email" placeholder="steve.grande@google.com"
+                                                oninvalid="this.setCustomValidity('Not Valid')"
+                                                onchange="try{setCustomValidity('')}catch(e){}"
+                                                oninput="setCustomValidity(' ')"
+                                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                                         </div>
                                         <div class="tw-mb-4 tw-text-left tw-h-16">
                                             <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
@@ -290,7 +309,7 @@
                                             </label>
                                             <input v-model="registerForm.model.firstName"
                                                 class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
-                                                id="firstname" type="text" placeholder="Steve">
+                                                id="firstname" type="text" placeholder="Steve" required>
                                         </div>
                                         <div class="tw-mb-4 tw-text-left tw-h-16">
                                             <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
@@ -299,7 +318,7 @@
                                             </label>
                                             <input v-model="registerForm.model.lastName"
                                                 class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
-                                                id="lastname" type="text" placeholder="Grande">
+                                                id="lastname" type="text" placeholder="Grande" required>
                                         </div>
                                         <div class="tw-mb-4 tw-text-left tw-h-16">
                                             <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
@@ -308,7 +327,7 @@
                                             </label>
                                             <input v-model="registerForm.model.userName"
                                                 class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
-                                                id="username" type="text" placeholder="Steve Grande">
+                                                id="username" type="text" placeholder="Steve Grande" required>
                                         </div>
                                         <div class="tw-mb-4 tw-text-left">
                                             <label class="tw-block tw-text-gray-700 tw-text-sm tw-font-medium tw-mb-2"
@@ -317,13 +336,14 @@
                                             </label>
                                             <input v-model="registerForm.model.passWord"
                                                 class="tw-shadow tw-bg-white tw-appearance-none tw-border tw-rounded tw-w-full tw-py-2 tw-px-3 tw-text-gray-700 tw-leading-tight focus:tw-outline-none focus:tw-shadow-outline"
-                                                id="passwordregister" type="password" placeholder="******************">
+                                                id="passwordregister" type="password" placeholder="******************"
+                                                required>
                                         </div>
 
                                         <div>
                                             <button @click="registerUser"
                                                 class="tw-w-full tw-bg-cyan-600 tw-shadow tw-drop-shadow-3xl hover:tw-bg-cyan-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded focus:tw-outline-none focus:tw-shadow-outline"
-                                                type="button">
+                                                type="submit">
                                                 Sign up
                                             </button>
                                         </div>
@@ -361,7 +381,6 @@
                                                 </div>
                                             </button>
                                         </div>
-
                                     </form>
                                 </div>
                             </v-card>
@@ -396,6 +415,17 @@
     <!--Content starts-->
     <!--Content ends-->
 </body>
+<script type="text/template" id="customLoader">
+    <div id="loader">
+        <div class="ls-particles ls-part-1"></div>
+        <div class="ls-particles ls-part-2"></div>
+        <div class="ls-particles ls-part-3"></div>
+        <div class="ls-particles ls-part-4"></div>
+        <div class="ls-particles ls-part-5"></div>
+        <div class="lightsaber ls-left ls-green"></div>
+        <div class="lightsaber ls-right ls-red"></div>
+      </div>
+</script>
 <script src="/dist/js/Auth/Login.entry.js" defer></script>
 
 </html>
