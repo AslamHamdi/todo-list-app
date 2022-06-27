@@ -4,8 +4,8 @@
   "description": "A simple to do list project by Wokle",
   "main": "Routers/index.js",
   "scripts": {
-    "prod": "node ./Routers/index.js",
-    "start": "npm-run-all --parallel watch:server watch:build",
+    "start": "node ./Routers/index.js",
+    "dev": "npm-run-all --parallel watch:server watch:build",
     "watch:build": "webpack --watch",
     "watch:server": "nodemon \"./dist/index.js\" --watch \"./dist\""
   },
