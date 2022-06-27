@@ -3,6 +3,7 @@ import vuetify from '/Config/vuetify'
 const _ = require('lodash')
 const $ = require('jquery')
 import * as __functionCustom from '../FunctionCustom';
+import axios from 'axios';
 
 var hashVal = window.location.hash.substring(1);
 Vue.use(vuetify)
@@ -26,6 +27,7 @@ const layoutApp = new Vue({
             currentHash: "",
             isLoad: false,
             test: "test",
+            userProfile: ""
         }
     },
     methods:{
@@ -41,6 +43,18 @@ const layoutApp = new Vue({
                 }
             }
         },
+        ping(){
+            try {
+                axios.post('ping', {
+                }).then(resp => {
+                    this.userProfile = resp.data.user
+                }).catch(err => {
+                    __functionCustom.showErrorMsg("ERROR: ", err)
+                })
+            } catch (err) {
+                __functionCustom.showErrorMsg(err)
+            }
+        },
         onInitialLoadPage(){
             if(!window.location.hash){
                 window.location.hash = "MyDay"
@@ -50,6 +64,7 @@ const layoutApp = new Vue({
                 this.currentHash = window.location.hash.substring(1);
                 this.onChangeNav(this.currentHash)
             }
+            this.ping()
         },
         expandSidebar(){
             if(!this.isSidebarOpen){ //Open side bar

@@ -106,6 +106,18 @@ function isLoggedIn(req, res, next) {
 	
 }
 
+app.post('/ping', function(req, res, next) {
+    res.status(200).json({ 
+        message: 'pong', 
+        user: {
+            email: req.user.email_address,
+            firstName: req.user.first_name,
+            lastName: req.user.last_name,
+            userName: req.user.user_name,
+    } 
+    })
+});
+
 //Api Route
 app.use('/api', require('./ApiRouter'))
 //Auth router

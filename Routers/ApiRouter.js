@@ -4,13 +4,6 @@ const MyDayRouter = require('./api/MyDay/MyDayRouter')
 const ImportantRouter = require('./api/Important/ImportantRouter')
 const TasksRouter = require('./api/Tasks/TasksRouter')
 const PlannedRouter = require('./api/Planned/PlannedRouter')
-
-
-//MyDay api Router
-router
-    .route("/MyDayRouter")
-    .get(MyDayRouter.getAllUsers)
-    .post(MyDayRouter.getAllUsers)
     
 router
     .route("/addNewtask")

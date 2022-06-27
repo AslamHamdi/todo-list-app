@@ -2,7 +2,7 @@ const Post = require('../../../Models/Planned')
 
 exports.getAllOverdueTasks = async (req, res, next) => {
     try{
-        let data = new Post()
+        let data = new Post(req.user)
         data = await data.getAllOverdueTasks()
         res.status(200).json({data})
         return data
@@ -14,7 +14,7 @@ exports.getAllOverdueTasks = async (req, res, next) => {
 
 exports.getAllTomorrowTasks = async (req, res, next) => {
     try{
-        let data = new Post()
+        let data = new Post(req.user)
         data = await data.getAllTomorrowTasks()
         res.status(200).json({data})
         return data
@@ -26,7 +26,7 @@ exports.getAllTomorrowTasks = async (req, res, next) => {
 
 exports.getAllThisWeekTasks = async (req, res, next) => {
     try{
-        let data = new Post()
+        let data = new Post(req.user)
         let payload = req.body.data
         data = await data.getAllThisWeekTasks(payload)
         res.status(200).json({data})
@@ -39,7 +39,7 @@ exports.getAllThisWeekTasks = async (req, res, next) => {
 
 exports.getAllPlannedTasks = async (req, res, next) => {
     try{
-        let data = new Post()
+        let data = new Post(req.user)
         data = await data.getAllPlannedTasks()
         res.status(200).json({data})
         return data

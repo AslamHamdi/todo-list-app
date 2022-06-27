@@ -1,18 +1,8 @@
 const Post = require('../../../Models/MyDay')
 
-exports.getAllUsers = async (req, res, next) => {
-    try{
-        let data = await Post.getAllUsers()
-        res.status(200).json({data})
-    }catch(err){
-        console.log(err)
-        next(err)
-    }
-}
-
 exports.getAllTodayTasks = async (req, res, next) => {
     try{
-        let data = new Post()
+        let data = new Post(req.user)
         data = await data.getAllTodayTasks()
         res.status(200).json({data})
         return data
@@ -24,7 +14,7 @@ exports.getAllTodayTasks = async (req, res, next) => {
 
 exports.addNewTask = async (req, res, next) => {
     try{
-        let data = new Post()
+        let data = new Post(req.user)
         let payload = req.body.data
         data = await data.addNewTask(payload);
         res.status(200).json(data)
@@ -36,7 +26,7 @@ exports.addNewTask = async (req, res, next) => {
 
 exports.deleteTask = async (req, res, next) => {
     try {
-        let data = new Post()
+        let data = new Post(req.user)
         let payload = req.body.data
         data = await data.deleteTask(payload)
         res.status(200).json(data)
@@ -48,7 +38,7 @@ exports.deleteTask = async (req, res, next) => {
 
 exports.addOrRemoveImportantTask = async (req, res, next) => {
     try {
-        let data = new Post()
+        let data = new Post(req.user)
         let payload = req.body.data
         data = await data.addOrRemoveImportantTask(payload)
         res.status(200).json(data)
@@ -60,7 +50,7 @@ exports.addOrRemoveImportantTask = async (req, res, next) => {
 
 exports.addOrRemoveCompletedTask = async (req, res, next) => {
     try {
-        let data = new Post()
+        let data = new Post(req.user)
         let payload = req.body.data
         data = await data.addOrRemoveCompletedTask(payload)
         res.status(200).json(data)
