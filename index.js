@@ -17,11 +17,11 @@ let users = {
     password: 123,
 }
 
-app.use('/dist', express.static(__dirname + './dist'))
-app.use('/ClientApp', express.static(__dirname + './ClientApp/'))
-app.use('/assets', express.static(__dirname + './ClientApp/src/assets/'))
-app.use('/Views', express.static(__dirname + './Views/'))
-app.use('/Config', express.static(__dirname + './Config/'))
+app.use('/dist', express.static(__dirname + '/dist'))
+app.use('/ClientApp', express.static(__dirname + '/ClientApp/'))
+app.use('/assets', express.static(__dirname + '/ClientApp/src/assets/'))
+app.use('/Views', express.static(__dirname + '/Views/'))
+app.use('/Config', express.static(__dirname + '/Config/'))
 
 app.use(morgan('dev'));
 app.use(cookieParser()); 
