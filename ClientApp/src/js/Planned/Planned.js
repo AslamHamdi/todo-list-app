@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Vue from 'vue';
 import vuetify from '/Config/vuetify'
-import AjaxCall from '../AjaxCall'
 import * as __functionCustom from '../FunctionCustom';
 var moment = require('moment');
 
