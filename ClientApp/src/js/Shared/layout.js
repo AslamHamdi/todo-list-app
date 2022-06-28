@@ -91,7 +91,7 @@ const layoutApp = new Vue({
                         $('#mainContentApp').html(responseTxt);
                      });
                     var script = document.createElement('script');
-                    script.src = `/dist/js/MyDay/${this.currentHash}.entry.js`;
+                    script.src = `../../../../dist/js/MyDay/${this.currentHash}.entry.js`;
                     script.defer = "defer"
                     document.body.appendChild(script);
                 }else if(this.currentHash == "Important"){
@@ -99,7 +99,7 @@ const layoutApp = new Vue({
                         $('#mainContentApp').html(responseTxt);
                      });
                     var script = document.createElement('script');
-                    script.src = `/dist/js/Important/${this.currentHash}.entry.js`;
+                    script.src = `../../../../dist/js/Important/${this.currentHash}.entry.js`;
                     script.defer = "defer"
                     document.body.appendChild(script);
                 }else if(this.currentHash == "Planned"){
@@ -107,7 +107,7 @@ const layoutApp = new Vue({
                         $('#mainContentApp').html(responseTxt);
                      });
                     var script = document.createElement('script');
-                    script.src = `/dist/js/Planned/${this.currentHash}.entry.js`;
+                    script.src = `../../../../dist/js/Planned/${this.currentHash}.entry.js`;
                     script.defer = "defer"
                     document.body.appendChild(script);
                 }else if(this.currentHash == "Tasks"){
@@ -115,7 +115,7 @@ const layoutApp = new Vue({
                         $('#mainContentApp').html(responseTxt);
                      });
                     var script = document.createElement('script');
-                    script.src = `/dist/js/Tasks/${this.currentHash}.entry.js`;
+                    script.src = `../../../../dist/js/Tasks/${this.currentHash}.entry.js`;
                     script.defer = "defer"
                     document.body.appendChild(script);
                 }
