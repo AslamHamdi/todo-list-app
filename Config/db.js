@@ -1,4 +1,4 @@
-require('dotenv').config({path: __dirname + '../../.env'})
+require('dotenv').config({path: __dirname + '../.env'})
 const mysql = require('mysql2')
 
 // Developmnet DB Config
