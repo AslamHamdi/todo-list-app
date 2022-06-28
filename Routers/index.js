@@ -123,6 +123,6 @@ app.use('/api', require('./ApiRouter'))
 //Auth router
 app.use('/auth', require('./AuthRouter'))
 
-app.listen(port, () => console.log(`Server is live on ${port}`))
+app.listen(port || 5000, () => console.log(`Server is live on ${port}`))
 
 
