@@ -17,6 +17,8 @@ let users = {
     password: 123,
 }
 
+process.env.NODE_ENV = 'production';
+
 app.use('/dist', express.static(__dirname + '/dist'))
 app.use('/ClientApp', express.static(__dirname + '/ClientApp/'))
 app.use('/assets', express.static(__dirname + '/ClientApp/src/assets/'))

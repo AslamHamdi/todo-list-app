@@ -5,7 +5,7 @@
   "main": "Routers/index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "webpack --mode production",
+    "postinstall": "webpack --env.production --config ./config/webpack.js --progress",
     "dev": "npm-run-all --parallel watch:server watch:build",
     "watch:build": "webpack --watch",
     "watch:server": "nodemon \"./dist/index.js\" --watch \"./dist\""
