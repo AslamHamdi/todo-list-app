@@ -1,4 +1,4 @@
-require('dotenv').config({path: __dirname + '../../.env'})
+require('dotenv').config({path: __dirname + '.env'})
 const path = require('path')
 const express = require('express')
 const session = require('express-session')
@@ -17,11 +17,11 @@ let users = {
     password: 123,
 }
 
-app.use('/dist', express.static(__dirname + '../../dist/'))
-app.use('/ClientApp', express.static(__dirname + '../../ClientApp/'))
-app.use('/assets', express.static(__dirname + '../../ClientApp/src/assets/'))
-app.use('/Views', express.static(__dirname + '../../Views/'))
-app.use('/Config', express.static(__dirname + '../../Config/'))
+app.use('/dist', express.static(__dirname + './dist'))
+app.use('/ClientApp', express.static(__dirname + './ClientApp/'))
+app.use('/assets', express.static(__dirname + './ClientApp/src/assets/'))
+app.use('/Views', express.static(__dirname + './Views/'))
+app.use('/Config', express.static(__dirname + './Config/'))
 
 app.use(morgan('dev'));
 app.use(cookieParser()); 
@@ -43,7 +43,7 @@ app.use(flash())
 
 //Default route to todo page
 app.get('/', isLoggedIn, function(req, res){
-    res.sendFile(path.join(__dirname, '../Views/Shared/layout.html'), {
+    res.sendFile(path.join(__dirname, './Views/Shared/layout.html'), {
         user: req.user
     })
 })
@@ -54,7 +54,7 @@ app.get('/login', function(req, res){
     if(req.user){
         res.redirect('/');
     }else{
-        res.sendFile(path.join(__dirname, '../Views/Auth/Login.html'))
+        res.sendFile(path.join(__dirname, './Views/Auth/Login.html'))
     }
 })
 
