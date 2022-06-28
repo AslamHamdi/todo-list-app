@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Vue from 'vue';
 import vuetify from '/Config/vuetify'
-import AjaxCall from '../AjaxCall'
 import * as __functionCustom from '../FunctionCustom';
 
 var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -218,7 +217,7 @@ const tasksApp = new Vue({
             this.buttonNow = event
         },
         testNotification(){
-            let promise = AjaxCall.Post('/api/getAllTasks', "")
+            //let promise = AjaxCall.Post('/api/getAllTasks', "")
         }  
     },
     computed: {

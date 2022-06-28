@@ -6,7 +6,6 @@ module.exports = {
     mode: 'development',
     entry: {
         "Shared/layout": './ClientApp/src/js/Shared/layout.js',
-        "AjaxCall": './ClientApp/src/js/AjaxCall.js',
         "Auth/Login": './ClientApp/src/js/Auth/Login.js',
         "MyDay/MyDay": './ClientApp/src/js/MyDay/MyDay.js',
         "Important/Important": './ClientApp/src/js/Important/Important.js',
