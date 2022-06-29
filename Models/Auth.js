@@ -17,7 +17,7 @@ class Post {
         }else{
             const salt = await bcrypt.genSalt(10);
             let hashed = await bcrypt.hash(data.passWord, salt);
-            let sql = "call sp_user(?, ?, ?, ?, ?, ?, ?);"
+            let sql = "call sp_user(?, ?, ?, ?, ?, ?, ?, ?);"
             result.data = await db.query(sql,
                 [1, data.firstName, data.lastName, data.userName, data.email, hashed, "local", null], function(err, result){
                     if(err){
