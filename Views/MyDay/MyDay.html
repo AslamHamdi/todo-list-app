@@ -77,7 +77,7 @@
 </script>
 
 <script type="text/template" id="haveTask">
-    <div class="tw-pl-2 tw-w-full tw-pr-2 tw-rounded-lg tw-space-y-2 tw-overflow-auto">
+    <div class="tw-pl-2 tw-w-full tw-pr-2 tw-rounded-lg tw-space-y-2 tw-overflow-auto scrollbar">
         <span style="display: none">{{taskComp}}</span>
         <div v-for="(o, i) in taskComp.notCompleted" :key="i" :id="`box-${o.TaskId}`" class="new-box tw-p-6 tw-bg-white tw-rounded-lg tw-border tw-border-gray-200 tw-shadow-md dark:tw-bg-gray-800 dark:tw-border-gray-700">
 
