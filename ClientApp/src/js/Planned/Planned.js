@@ -3,6 +3,8 @@ import Vue from 'vue';
 import vuetify from '/Config/vuetify'
 import * as __functionCustom from '../FunctionCustom';
 var moment = require('moment');
+import 'moment-timezone'
+moment.tz.setDefault("Asia/Singapore");
 
 var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 var months = ['Jan','Feb','March','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
