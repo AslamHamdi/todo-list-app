@@ -37149,6 +37149,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 moment.tz.setDefault("Asia/Singapore");
 var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 var months = ['Jan', 'Feb', 'March', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+const defaultDateFormat = "YYYY-MM-DD";
 vue__WEBPACK_IMPORTED_MODULE_4___default().use(_Config_vuetify__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_4___default().filter('truncate', _FunctionCustom__WEBPACK_IMPORTED_MODULE_2__.textFilter);
 const noTaskTemplate = {
@@ -37243,6 +37244,10 @@ const haveTaskTemplate = {
 
     addOrRemoveCompletedTask(taskId) {
       this.$emit('add-or-remove-completed-task', taskId);
+    },
+
+    selectEditTask(taskId) {
+      this.$emit('select-edit-task', taskId);
     }
 
   },
@@ -37339,7 +37344,9 @@ const plannedApp = new (vue__WEBPACK_IMPORTED_MODULE_4___default())({
       allTasks: "",
       startDate: undefined,
       endDate: undefined,
-      selectedNow: ""
+      selectedNow: "",
+      isEdit: false,
+      editTaskObj: {}
     };
   },
 
@@ -37499,7 +37506,45 @@ const plannedApp = new (vue__WEBPACK_IMPORTED_MODULE_4___default())({
       }
     },
 
-    testNotification() {},
+    selectEditTask(taskId) {
+      this.allTasks.forEach((o, i) => {
+        if (o.TaskId == taskId) {
+          this.isEdit = true;
+          this.newTask.model.task = o.TaskName;
+          this.newTask.model.date = moment(o.TaskDate).format(defaultDateFormat);
+          this.newTask.model.time = o.TaskTime;
+          this.editTaskObj = o;
+        }
+      });
+    },
+
+    confirmEditTask() {
+      this.editTaskObj.TaskName = this.newTask.model.task;
+      this.editTaskObj.TaskDate = this.newTask.model.date;
+      this.editTaskObj.TaskTime = this.newTask.model.time;
+      let editSound = new Audio('/assets/edited.mp3');
+
+      try {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/editTask', {
+          data: this.editTaskObj
+        }).then(resp => {
+          editSound.play();
+          this.getDataFromServer();
+        }).catch(err => {
+          _FunctionCustom__WEBPACK_IMPORTED_MODULE_2__.showErrorMsg("Error in updating data in server");
+        });
+        this.getDataFromServer();
+      } catch (err) {
+        _FunctionCustom__WEBPACK_IMPORTED_MODULE_2__.showErrorMsg(err);
+      }
+    },
+
+    onClickCancel() {
+      this.newTask.model.task = "";
+      this.newTask.model.date = undefined;
+      this.newTask.model.time = null;
+      this.isEdit = false;
+    },
 
     onClickButton(event) {
       this.buttonNow = event;

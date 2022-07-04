@@ -2,9 +2,11 @@ import axios from 'axios';
 import Vue from 'vue';
 import vuetify from '/Config/vuetify'
 import * as __functionCustom from '../FunctionCustom';
+import moment from 'moment';
 
 var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 var months = ['Jan','Feb','March','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
+const defaultDateFormat = "YYYY-MM-DD"
 
 Vue.use(vuetify)
 
@@ -35,6 +37,9 @@ const haveTaskTemplate = {
         },
         addOrRemoveCompletedTask(taskId){
             this.$emit('add-or-remove-completed-task', taskId)
+        },
+        selectEditTask(taskId){
+            this.$emit('select-edit-task', taskId)
         }
     },
     computed:{
@@ -88,7 +93,9 @@ const myDayApp = new Vue({
 
             menuTime: false,
             modalTime: false,
-            allTasks: ""
+            allTasks: "",
+            isEdit: false,
+            editTaskObj: {}
         }
     },
     mounted(){
@@ -213,11 +220,44 @@ const myDayApp = new Vue({
                 __functionCustom.showErrorMsg(err)
             }
         },
+        selectEditTask(taskId){
+            this.allTasks.forEach((o, i) => {
+                if(o.TaskId == taskId){
+                    this.isEdit = true
+                    this.newTask.model.task = o.TaskName
+                    this.newTask.model.date = moment(o.TaskDate).format(defaultDateFormat) 
+                    this.newTask.model.time = o.TaskTime
+                    this.editTaskObj = o
+                }
+            })
+        },
+        confirmEditTask(){
+            this.editTaskObj.TaskName = this.newTask.model.task
+            this.editTaskObj.TaskDate = this.newTask.model.date
+            this.editTaskObj.TaskTime = this.newTask.model.time
+            let editSound = new Audio('/assets/edited.mp3')
+            try {
+                axios.post('api/editTask', {
+                    data: this.editTaskObj
+                }).then(resp => {
+                    editSound.play()
+                    this.getAlltasks()
+                }).catch(err => {
+                    __functionCustom.showErrorMsg("Error in updating data in server")
+                })
+                this.getAlltasks()
+            } catch (err) {
+                __functionCustom.showErrorMsg(err)
+            }
+        },
         onClickButton(event){
             this.buttonNow = event
         },
-        testNotification(){
-            //let promise = AjaxCall.Post('/api/getAllTasks', "")
+        onClickCancel(){
+            this.newTask.model.task = ""
+            this.newTask.model.date = undefined
+            this.newTask.model.time = null
+            this.isEdit = false
         }  
     },
     computed: {

@@ -57,9 +57,13 @@
             class="tw-py-1 tw-px-3 tw-bg-green-500 tw-text-white tw-rounded-lg tw-shadow-lg hover:tw-bg-green-700 focus:tw-outline-none focus:tw-ring-opacity-75">
             Add
         </button>
-        <button @click="testNotification()"
+        <button @click="onClickCancel()"
             class="tw-py-1 tw-px-4 tw-bg-red-400 tw-text-white tw-rounded-lg tw-shadow-lg hover:tw-bg-red-700 focus:tw-outline-none focus:tw-ring-opacity-75">
             Cancel
+        </button>
+        <button @click="confirmEditTask()" v-show="isEdit"
+            class="tw-py-1 tw-px-4 tw-bg-cyan-600 tw-text-white tw-rounded-lg tw-shadow-lg hover:tw-bg-cyan-700 focus:tw-outline-none focus:tw-ring-opacity-75">
+            Edit
         </button>
     </div>
     <div style="display: none;">{{allTasksProp}}</div>
@@ -67,7 +71,7 @@
         style="height: 72% !important;">
         <component :is="componentNow" @get-all-tasks="getAlltasks" :all-tasks="allTasksProp" @deletetask="deleteTask"
             @add-or-remove-important-task="addOrRemoveImportantTask"
-            @add-or-remove-completed-task="addOrRemoveCompletedTask">
+            @add-or-remove-completed-task="addOrRemoveCompletedTask" @select-edit-task="selectEditTask">
         </component>
     </div>
 </div>
@@ -107,6 +111,9 @@
                         </svg>
                     </span>
                     <span class="tw-inline-block tw-text-sm">{{ o.dateTime }}</span>
+                    <svg @click="selectEditTask(o.TaskId)" xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5 tw-cursor-pointer" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                    </svg>
                 </div>
             </div>
             <!-- Action button -->
@@ -157,6 +164,9 @@
                             </svg>
                         </span>
                         <span class="tw-inline-block tw-text-sm">{{ o.dateTime }}</span>
+                        <svg @click="selectEditTask(o.TaskId)" xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5 tw-cursor-pointer" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                        </svg>
                     </div>
                 </div>
                 <!-- Action button -->

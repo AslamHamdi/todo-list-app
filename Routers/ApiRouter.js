@@ -30,6 +30,11 @@ router
     .get(MyDayRouter.addOrRemoveCompletedTask)
     .post(MyDayRouter.addOrRemoveCompletedTask)
 
+router
+    .route("/editTask")
+    .get(MyDayRouter.editTask)
+    .post(MyDayRouter.editTask)
+
 // Important api router
 router
     .route("/getAllImportantTasks")
@@ -62,6 +67,7 @@ router
     .route("/getAllPlannedTasks")
     .get(PlannedRouter.getAllPlannedTasks)
     .post(PlannedRouter.getAllPlannedTasks)
+
     
 
 

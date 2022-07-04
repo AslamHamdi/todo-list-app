@@ -59,3 +59,15 @@ exports.addOrRemoveCompletedTask = async (req, res, next) => {
         next(err)
     }
 }
+
+exports.editTask = async (req, res, next) => {
+    try {
+        let data = new Post(req.user)
+        let payload = req.body.data
+        data = await data.editTask(payload)
+        res.status(200).json(data)
+    } catch (err) {
+        console.log(err)
+        next(err)
+    }
+}

@@ -75,6 +75,21 @@ class Post {
             })
         return result
     }
+
+    async editTask(payload){
+        console.log("PAYLOAD: ", payload)
+        let data = payload
+        let sql = "call sp_task(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, @taskId2); SELECT @taskId2;"
+        const result = await db.query(sql,
+            [12, data.TaskName, data.TaskDate, data.TaskTime, this.user.id, data.TaskId, null, null, null, null, null], function(err, result){
+                if(err){
+                    console.log("err: ", err)
+                }else{
+                    console.log("result", result)
+                }
+            })
+        return result
+    }
 }
 
 module.exports = Post
