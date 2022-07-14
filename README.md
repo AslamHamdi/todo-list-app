@@ -2,7 +2,7 @@
 
 vue 2 because vue 3 sucks.... 
 Nah, just kidding
-There's still a lot of library doesn't support vue 3 at the moment, 13/6/22
+There are still a lot of library doesn't support vue 3 at the moment, 13/6/22
 
 # How to run?
 1. Clone repo
