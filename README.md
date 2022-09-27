@@ -10,6 +10,6 @@
 # Notes
 Feel free to comments on my code or add anything. If you find this helpful, consider to follow and star me on github
 
-Live Demo at: http://wokle-todo-app.herokuapp.com/
+Live Demo available [here](http://wokle-todo-app.herokuapp.com/)
 
 Thanks
