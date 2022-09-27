@@ -1,4 +1,7 @@
-# Simple todo list app using nodejs, express, vuejs, tailwind css, vuetify
+# Simple todo list app using NodeJS, Vue and Tailwind
+
+### Prerequisite:
+1. Node js 16.17.1
 
 ### How to run?
 1. Clone repo
