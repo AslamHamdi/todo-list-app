@@ -1,4 +1,4 @@
-# Simple todo list app using NodeJS, Vue and Tailwind
+# Todo list app using NodeJS, Vue and Tailwind
 
 ### Prerequisite:
 1. Node js 16.17.1
@@ -11,8 +11,6 @@
 5. Run 'npm start', navigate to localhost:{PORT} and you good to go
 
 ### Notes
-Feel free to comments on my code or add anything. If you find this helpful, consider to follow and star me on github
 
 Live Demo available [here](http://wokle-todo-app.herokuapp.com/)
 
-Thanks
